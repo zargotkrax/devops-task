@@ -41,8 +41,8 @@ pipeline {
         stage('Deploy to Local Kubernetes') {
             steps {
                 echo 'Deploying to Kubernetes...'
-                sh 'kubectl apply -f k8s/helloapp-deployment.yaml'
-                sh 'kubectl apply -f k8s/helloapp-service.yaml'
+                sh 'kubectl apply -f helloapp-deployment.yaml'
+                sh 'kubectl apply -f helloapp-service.yaml'
             }
         }
     }
