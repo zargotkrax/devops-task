@@ -53,8 +53,12 @@ pipeline {
         stage('Deploy to Local Kubernetes') {
             steps {
                 echo 'Deploying to Kubernetes...'
-                sh 'kubectl apply -f helloapp-deployment.yaml'
-                sh 'kubectl apply -f helloapp-service.yaml'
+                withCredentials([file(credentialsId: 'KUBECONFIG_CRED_ID', variable: 'KUBECONFIG')]) {
+                    sh 'kubectl --kubeconfig=$KUBECONFIG apply -f helloapp-deployment.yaml'
+                    sh 'kubectl --kubeconfig=$KUBECONFIG apply -f helloapp-service.yaml'
+                }
+                /*sh 'kubectl apply -f helloapp-deployment.yaml'
+                sh 'kubectl apply -f helloapp-service.yaml'*/
             }
         }
     }
