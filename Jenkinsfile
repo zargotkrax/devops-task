@@ -34,7 +34,9 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 echo 'Running Docker container...'
-                sh 'docker run -d -p 8080:8080 $IMAGE_NAME:$TAG'
+                sh 'docker stop devops-task-container'
+                sh 'docker rm devops-task-container'
+                sh 'docker run -d --name devops-task-container -p 8080:8080 $IMAGE_NAME:$TAG'
             }
         }
 
