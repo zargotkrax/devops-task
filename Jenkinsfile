@@ -40,16 +40,12 @@ pipeline {
             }
         }
 
-        stage('Setup Kubeconfig') {
-            steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                sh '''
-                    mkdir -p $HOME/.kube
-                    cp $KUBECONFIG $HOME/.kube/config
-                    chmod 600 $HOME/.kube/config
-                    '''
-        }
-      }
+        stage('setup kubeconfig') {
+          steps {
+            withCredentials([file(credentialsId: 'kubeconfig', variable: 'kubeconfig')]) {
+                sh "cp \${kubeconfig} ${WORKSPACE}/kubeconfig"
+            }
+          }
     }
 
         stage('Deploy to Local Kubernetes') {
