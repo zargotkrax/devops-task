@@ -44,7 +44,6 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                 sh '''
-                    cp $KUBECONFIG kubeconfig
                     kubectl config current-context
                     '''
         }
