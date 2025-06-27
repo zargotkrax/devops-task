@@ -44,9 +44,8 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                 sh '''
-                    mkdir -p $HOME/.kube
-                    cp $KUBECONFIG $HOME/.kube/config
-                    chmod 600 $HOME/.kube/config
+                    cp $KUBECONFIG kubeconfig
+                    kubectl config current-context
                     '''
         }
       }
