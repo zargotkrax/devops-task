@@ -40,7 +40,7 @@ pipeline {
             }
         }
 
-        stage('Setup Kubeconfig') {
+/*        stage('Setup Kubeconfig') {
             steps {
                 withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                 sh '''
@@ -48,16 +48,13 @@ pipeline {
                     '''
         }
       }
-    }
+    }*/
 
         stage('Deploy to Local Kubernetes') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]){
-                    echo 'Deploying to Kubernetes...'
-                    sh 'kubectl apply -f helloapp-deployment.yaml'
-                    sh 'kubectl apply -f helloapp-service.yaml'
-                }
-                
+                echo 'Deploying to Kubernetes...'
+                sh 'kubectl apply -f helloapp-deployment.yaml'
+                sh 'kubectl apply -f helloapp-service.yaml'
             }
         }
     }
