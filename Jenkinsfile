@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Running tests...'
                 sh 'chmod +x test.sh'
-                sh './test.sh'
+                bash test.sh
             }
         }
 
