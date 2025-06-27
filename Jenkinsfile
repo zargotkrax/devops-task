@@ -40,23 +40,11 @@ pipeline {
             }
         }
 
-/*        stage('Setup Kubeconfig') {
-            steps {
-                withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                sh '''
-                    kubectl config current-context
-                    '''
-        }
-      }
-    }*/
-
         stage('Deploy to Local Kubernetes') {
             steps {
                 echo 'Deploying to Kubernetes...'
                     sh 'kubectl --kubeconfig=/var/lib/jenkins/kubeconfig/config apply -f helloapp-deployment.yaml'
                     sh 'kubectl --kubeconfig=/var/lib/jenkins/kubeconfig/config apply -f helloapp-service.yaml'
-                /*sh 'kubectl apply -f helloapp-deployment.yaml'
-                sh 'kubectl apply -f helloapp-service.yaml'*/
             }
         }
     }
