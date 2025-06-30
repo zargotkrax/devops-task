@@ -31,6 +31,8 @@ pipeline {
             }
         }
 
+//Assuming a docker container is running with this name but we either don't get to this stage(so we don't stop the previous working one) or we get to this stage and make a container for it.
+//the only exception would be running it for the first time but a docker run most likely happens during manual testing unless there is a different cluster for developing and jenkins 
         stage('Run Docker Container') {
             steps {
                 echo 'Running Docker container...'
